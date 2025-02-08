@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorry Kishu Animation</title>
+    <title>Sorry Kishu</title>
     <style>
         body {
             display: flex;
@@ -38,41 +38,11 @@
             from { transform: translateY(0); opacity: 1; }
             to { transform: translateY(10px); opacity: 0.5; }
         }
-        .heart {
-            width: 50px;
-            height: 50px;
-            background-color: red;
-            position: relative;
-            transform: rotate(-45deg);
-            margin-top: 20px;
-            animation: fadeHeart 1.5s infinite alternate;
-        }
-        .heart:before,
-        .heart:after {
-            content: "";
-            width: 50px;
-            height: 50px;
-            background-color: red;
-            border-radius: 50%;
-            position: absolute;
-        }
-        .heart:before {
-            top: -25px;
-            left: 0;
-        }
-        .heart:after {
-            left: 25px;
-            top: 0;
-        }
-        @keyframes fadeHeart {
-            from { opacity: 0.3; transform: scale(0.9) rotate(-45deg); }
-            to { opacity: 1; transform: scale(1.1) rotate(-45deg); }
-        }
         .buttons {
             margin-top: 20px;
         }
         .btn {
-            padding: 10px 20px;
+            padding: 10px 15px;
             font-size: 20px;
             border: none;
             cursor: pointer;
@@ -87,24 +57,39 @@
             background-color: #d32f2f;
             color: white;
         }
+        .question-btn {
+            background-color: #ff9800;
+            color: white;
+        }
+        .big-text {
+            font-size: 35px;
+            font-weight: bold;
+            color: red;
+        }
+        .proposal-text {
+            font-size: 20px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div id="message">
         <div class="sorry-text">
-            Sorry Kishu 💔 <span class="crying-emoji">🥺</span>
+            Sorry Kishu 💔 <span id="emoji" class="crying-emoji">🥺</span>
         </div>
-        <div class="heart"></div>
     </div>
 
     <div class="buttons">
         <button class="btn forgive-btn" onclick="forgive()">Forgive</button>
         <button class="btn not-forgive-btn" onclick="notForgive()">Not Forgive</button>
+        <button class="btn question-btn" onclick="askQuestion()">Another Question...</button>
     </div>
 
     <script>
-        let emojis = ["🥺", "😢", "😭", "😞", "😔", "😩"];
-        let emojiIndex = 0;
+        let sadEmojis = ["🥺", "😢", "😭", "😞", "😔", "😩"];
+        let teasingEmojis = ["😜", "😏", "🙃", "🤭", "🤨", "😈"];
+        let sadIndex = 0;
+        let teaseIndex = 0;
 
         function forgive() {
             document.getElementById("message").innerHTML = `
@@ -117,16 +102,58 @@
         }
 
         function notForgive() {
-            let currentEmoji = emojis[emojiIndex % emojis.length];
-            emojiIndex++;
+            let currentEmoji = sadEmojis[sadIndex % sadEmojis.length];
+            sadIndex++;
             document.getElementById("message").innerHTML = `
                 <div class="sorry-text">
                     Please? ${currentEmoji}
                 </div>
-                <div class="heart"></div>
+            `;
+        }
+
+        function askQuestion() {
+            document.getElementById("message").innerHTML = `
+                <div class="sorry-text" style="color: #ff9800;">
+                    Okayyyyy... 🤔
+                </div>
+                <div style="font-size: 25px; margin-top: 10px;">
+                    So are you ready for it......?????
+                </div>
+            `;
+            document.querySelector(".buttons").innerHTML = `
+                <button class="btn forgive-btn" onclick="propose()">Yesss 😏</button>
+                <button class="btn not-forgive-btn" onclick="tease()">No 👶</button>
+            `;
+        }
+
+        function propose() {
+            document.getElementById("message").innerHTML = `
+                <div class="proposal-text">
+                    I want to tell you that you're the only person I want to be with today, tomorrow, and forever. 💖<br>
+                    So on this Propose Day, I ask you my cutu...
+                </div>
+                <div class="big-text">
+                    Will you be my Valentine? 🌹❤️
+                </div>
+                <div style="font-size: 18px; color: gray; margin-top: 10px;">
+                    (Iska answer call pe chahiye 📞)
+                </div>
+            `;
+            document.querySelector(".buttons").style.display = "none";
+        }
+
+        function tease() {
+            let currentTeaseEmoji = teasingEmojis[teaseIndex % teasingEmojis.length];
+            teaseIndex++;
+            document.getElementById("message").innerHTML = `
+                <div class="sorry-text" style="color: #d32f2f;">
+                    Sochle...... ${currentTeaseEmoji}
+                </div>
+                <div style="font-size: 25px; margin-top: 10px;">
+                    So are you ready for it......?????
+                </div>
             `;
         }
     </script>
 </body>
 </html>
-
