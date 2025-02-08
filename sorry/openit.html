@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorry Kishu Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fce4ec;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .sorry-text {
+            font-size: 50px;
+            font-weight: bold;
+            color: #d32f2f;
+            animation: shake 1s infinite;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .crying-emoji {
+            font-size: 50px;
+            animation: teardrop 1.5s infinite alternate;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-3px); }
+        }
+        @keyframes teardrop {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(10px); opacity: 0.5; }
+        }
+        .heart {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            margin-top: 20px;
+            animation: fadeHeart 1.5s infinite alternate;
+        }
+        .heart:before,
+        .heart:after {
+            content: "";
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart:before {
+            top: -25px;
+            left: 0;
+        }
+        .heart:after {
+            left: 25px;
+            top: 0;
+        }
+        @keyframes fadeHeart {
+            from { opacity: 0.3; transform: scale(0.9) rotate(-45deg); }
+            to { opacity: 1; transform: scale(1.1) rotate(-45deg); }
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .forgive-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .not-forgive-btn {
+            background-color: #d32f2f;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="message">
+        <div class="sorry-text">
+            Sorry Kishu 💔 <span class="crying-emoji">🥺</span>
+        </div>
+        <div class="heart"></div>
+    </div>
+
+    <div class="buttons">
+        <button class="btn forgive-btn" onclick="forgive()">Forgive</button>
+        <button class="btn not-forgive-btn" onclick="notForgive()">Not Forgive</button>
+    </div>
+
+    <script>
+        let emojis = ["🥺", "😢", "😭", "😞", "😔", "😩"];
+        let emojiIndex = 0;
+
+        function forgive() {
+            document.getElementById("message").innerHTML = `
+                <div class="sorry-text" style="color: green;">
+                    Thank You ❤️😊
+                </div>
+                <div style="font-size: 30px; margin-top: 10px;">I love you bhot sara 💖</div>
+            `;
+            document.querySelector(".buttons").style.display = "none";
+        }
+
+        function notForgive() {
+            let currentEmoji = emojis[emojiIndex % emojis.length];
+            emojiIndex++;
+            document.getElementById("message").innerHTML = `
+                <div class="sorry-text">
+                    Please? ${currentEmoji}
+                </div>
+                <div class="heart"></div>
+            `;
+        }
+    </script>
+</body>
+</html>
+
